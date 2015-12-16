@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LeadFormsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Lead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="128" />
+          <Property Name="LeadTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeadType">
+          <Key>
+            <PropertyRef Name="LeadTypeId" />
+          </Key>
+          <Property Name="LeadTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Lead_LeadType">
+          <End Role="LeadType" Type="Self.LeadType" Multiplicity="1" />
+          <End Role="Lead" Type="Self.Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeadType">
+              <PropertyRef Name="LeadTypeId" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="LeadTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LeadFormsModelStoreContainer">
+          <EntitySet Name="Lead" EntityType="Self.Lead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadType" EntityType="Self.LeadType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Lead_LeadType" Association="Self.FK_Lead_LeadType">
+            <End Role="LeadType" EntitySet="LeadType" />
+            <End Role="Lead" EntitySet="Lead" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LeadFormsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Lead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LeadTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LeadType" Relationship="Self.FK_Lead_LeadType" FromRole="Lead" ToRole="LeadType" />
+        </EntityType>
+        <EntityType Name="LeadType">
+          <Key>
+            <PropertyRef Name="LeadTypeId" />
+          </Key>
+          <Property Name="LeadTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="Self.FK_Lead_LeadType" FromRole="LeadType" ToRole="Lead" />
+        </EntityType>
+        <Association Name="FK_Lead_LeadType">
+          <End Role="LeadType" Type="Self.LeadType" Multiplicity="1" />
+          <End Role="Lead" Type="Self.Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeadType">
+              <PropertyRef Name="LeadTypeId" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="LeadTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LeadFormsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Leads" EntityType="Self.Lead" />
+          <EntitySet Name="LeadTypes" EntityType="Self.LeadType" />
+          <AssociationSet Name="FK_Lead_LeadType" Association="Self.FK_Lead_LeadType">
+            <End Role="LeadType" EntitySet="LeadTypes" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LeadFormsModelStoreContainer" CdmEntityContainer="LeadFormsEntities">
+          <EntitySetMapping Name="Leads">
+            <EntityTypeMapping TypeName="LeadFormsModel.Lead">
+              <MappingFragment StoreEntitySet="Lead">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LeadTypeId" ColumnName="LeadTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadTypes">
+            <EntityTypeMapping TypeName="LeadFormsModel.LeadType">
+              <MappingFragment StoreEntitySet="LeadType">
+                <ScalarProperty Name="LeadTypeId" ColumnName="LeadTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
