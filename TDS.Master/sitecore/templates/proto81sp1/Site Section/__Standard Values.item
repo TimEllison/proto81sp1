@@ -1,30 +1,23 @@
 ----item----
 version: 1
-id: {52163FAF-5FB4-4F02-A21C-C3AD737764E2}
+id: {DD70D9D0-8ABD-4143-91B2-4FABD417CA51}
 database: master
-path: /sitecore/templates/proto81sp1/Site Root/__Standard Values
-parent: {9E7B21C3-E5D6-4AA9-97D3-0FF326D96174}
+path: /sitecore/templates/proto81sp1/Site Section/__Standard Values
+parent: {5BCDE719-0312-4783-80BE-7308095EE7E4}
 name: __Standard Values
 master: {00000000-0000-0000-0000-000000000000}
-template: {9E7B21C3-E5D6-4AA9-97D3-0FF326D96174}
-templatekey: Site Root
+template: {5BCDE719-0312-4783-80BE-7308095EE7E4}
+templatekey: Site Section
 
-----field----
-field: {1172F251-DAD4-4EFB-A329-0C63500E4F1E}
-name: __Masters
-key: __masters
-content-length: 38
-
-{5BCDE719-0312-4783-80BE-7308095EE7E4}
 ----version----
 language: en
 version: 1
-revision: 427103b1-ba28-4da5-8383-ef76b8f9e279
+revision: 8d3d61c7-9ef2-4088-ae16-93ed79b7adbf
 
 ----field----
-field: {B6752160-6C76-4264-AF0C-1FC013DB8F92}
-name: Title
-key: title
+field: {83E79A96-E2A1-4A99-92B6-E5B171D519D7}
+name: Page TItle
+key: page title
 content-length: 5
 
 $name
@@ -41,7 +34,7 @@ name: __Created
 key: __created
 content-length: 16
 
-20151215T233344Z
+20151216T172724Z
 ----field----
 field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
 name: __Created by
@@ -55,14 +48,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-427103b1-ba28-4da5-8383-ef76b8f9e279
+8d3d61c7-9ef2-4088-ae16-93ed79b7adbf
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 16
 
-20151216T172817Z
+20151216T172801Z
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
